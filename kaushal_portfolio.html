@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kaushal Makwana — Industrial Engineer & Researcher</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #060D1A;
+  --navy-mid: #0A1525;
+  --navy-light: #0F1E35;
+  --amber: #F5A623;
+  --amber-dim: #C4821A;
+  --amber-glow: rgba(245,166,35,0.15);
+  --white: #FFFFFF;
+  --cream: #EDE8DF;
+  --gray: #7A8899;
+  --gray-dim: #3A4558;
+  --green: #00D68F;
+  --blue: #4A9EFF;
+  --red: #FF5757;
+  --purple: #8B5CF6;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { background:var(--navy); color:var(--cream); font-family:'Inter',sans-serif; line-height:1.7; overflow-x:hidden; }
+
+/* ─── CANVAS BACKGROUND ─── */
+#bgCanvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; opacity:0.4; }
+
+/* ─── NAV ─── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:200;
+  padding:16px 48px;
+  display:flex; justify-content:space-between; align-items:center;
+  background:rgba(6,13,26,0.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(245,166,35,0.08);
+}
+.nav-logo { font-family:'Space Grotesk',sans-serif; font-size:20px; font-weight:700; color:var(--white); letter-spacing:-1px; }
+.nav-logo span { color:var(--amber); }
+.nav-links { display:flex; gap:36px; list-style:none; }
+.nav-links a { font-size:12px; color:var(--gray); text-decoration:none; font-family:'JetBrains Mono',monospace; letter-spacing:1px; transition:color 0.2s; text-transform:uppercase; }
+.nav-links a:hover { color:var(--amber); }
+.nav-status { display:flex; align-items:center; gap:8px; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--green); }
+.status-dot { width:7px; height:7px; border-radius:50%; background:var(--green); animation:pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,214,143,0.4);} 50%{opacity:0.8;box-shadow:0 0 0 6px rgba(0,214,143,0);} }
+
+/* ─── HERO ─── */
+.hero {
+  min-height:100vh; display:flex; align-items:center; justify-content:center;
+  position:relative; padding:120px 48px 80px; overflow:hidden;
+}
+.hero-schematic {
+  position:absolute; inset:0; opacity:0;
+  animation:schematicFade 2s 0.5s forwards;
+}
+@keyframes schematicFade { to{opacity:1;} }
+
+/* SVG blueprint lines */
+.hero-schematic svg { width:100%; height:100%; }
+
+.hero-content { position:relative; z-index:2; max-width:1000px; width:100%; }
+
+.hero-eyebrow {
+  font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--amber);
+  letter-spacing:4px; text-transform:uppercase; margin-bottom:20px;
+  display:flex; align-items:center; gap:12px;
+  opacity:0; animation:fadeUp 0.8s 0.4s forwards;
+}
+.eyebrow-line { height:1px; width:40px; background:var(--amber); }
+
+.hero-name {
+  font-family:'Space Grotesk',sans-serif;
+  font-size:clamp(52px, 9vw, 100px);
+  font-weight:700; line-height:0.95;
+  color:var(--white); letter-spacing:-3px;
+  margin-bottom:6px;
+  opacity:0; animation:fadeUp 0.8s 0.6s forwards;
+}
+.hero-name .line2 { color:transparent; -webkit-text-stroke:1px rgba(245,166,35,0.6); display:block; }
+
+.hero-role {
+  font-family:'Space Grotesk',sans-serif; font-size:clamp(16px, 2.5vw, 22px);
+  font-weight:300; color:var(--gray); margin-bottom:40px;
+  opacity:0; animation:fadeUp 0.8s 0.8s forwards;
+}
+
+.hero-typewriter {
+  font-family:'JetBrains Mono',monospace; font-size:15px; color:var(--amber);
+  margin-bottom:56px; min-height:24px;
+  opacity:0; animation:fadeUp 0.8s 1s forwards;
+  display:flex; align-items:center; gap:10px;
+}
+.tw-prefix { color:var(--gray-dim); }
+.cursor { display:inline-block; width:2px; height:18px; background:var(--amber); animation:blink 1s infinite; vertical-align:middle; }
+@keyframes blink { 0%,49%{opacity:1;} 50%,100%{opacity:0;} }
+
+.hero-stats {
+  display:flex; gap:56px; flex-wrap:wrap;
+  opacity:0; animation:fadeUp 0.8s 1.2s forwards;
+}
+.stat { display:flex; flex-direction:column; position:relative; }
+.stat::after {
+  content:''; position:absolute; left:-28px; top:10%; height:80%;
+  width:1px; background:rgba(245,166,35,0.15);
+}
+.stat:first-child::after { display:none; }
+.stat-num { font-family:'Space Grotesk',sans-serif; font-size:42px; font-weight:700; color:var(--amber); line-height:1; }
+.stat-label { font-size:11px; color:var(--gray); font-family:'JetBrains Mono',monospace; letter-spacing:0.5px; margin-top:4px; }
+
+.hero-cta {
+  display:flex; gap:16px; margin-top:48px; flex-wrap:wrap;
+  opacity:0; animation:fadeUp 0.8s 1.4s forwards;
+}
+.btn { display:inline-flex; align-items:center; gap:8px; padding:13px 26px; border-radius:8px; font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:500; text-decoration:none; transition:all 0.3s; cursor:pointer; border:none; }
+.btn-amber { background:var(--amber); color:var(--navy); }
+.btn-amber:hover { background:var(--amber-dim); transform:translateY(-2px); box-shadow:0 10px 30px rgba(245,166,35,0.3); }
+.btn-ghost { background:transparent; color:var(--cream); border:1px solid rgba(255,255,255,0.12); }
+.btn-ghost:hover { border-color:var(--amber); color:var(--amber); transform:translateY(-2px); }
+
+.scroll-hint {
+  position:absolute; bottom:40px; left:48px;
+  font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--gray);
+  display:flex; align-items:center; gap:12px;
+  opacity:0; animation:fadeUp 0.8s 1.8s forwards;
+}
+.scroll-arrow { width:24px; height:24px; border-right:1px solid var(--gray); border-bottom:1px solid var(--gray); transform:rotate(45deg); animation:scrollBounce 1.5s infinite; }
+@keyframes scrollBounce { 0%,100%{transform:rotate(45deg) translateY(0);} 50%{transform:rotate(45deg) translateY(4px);} }
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px);} to{opacity:1;transform:translateY(0);} }
+
+/* ─── SECTIONS ─── */
+.section-wrap { position:relative; z-index:10; }
+section { padding:100px 48px; max-width:1100px; margin:0 auto; }
+
+.section-header { margin-bottom:64px; }
+.section-eyebrow { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--amber); letter-spacing:3px; text-transform:uppercase; margin-bottom:10px; display:flex; align-items:center; gap:10px; }
+.section-eyebrow::after { content:''; flex:1; max-width:60px; height:1px; background:rgba(245,166,35,0.3); }
+.section-title { font-family:'Space Grotesk',sans-serif; font-size:clamp(28px, 4vw, 44px); font-weight:600; color:var(--white); line-height:1.2; letter-spacing:-1px; margin-bottom:14px; }
+.section-sub { font-size:15px; color:var(--gray); max-width:560px; line-height:1.8; }
+
+/* ─── DIVIDER ─── */
+.section-divider { width:100%; height:1px; background:linear-gradient(90deg, transparent, rgba(245,166,35,0.12), transparent); position:relative; z-index:10; }
+
+/* ─── TIMELINE ─── */
+.timeline-outer { position:relative; padding-left:52px; }
+
+/* Animated spine */
+.tl-spine {
+  position:absolute; left:16px; top:0; bottom:0; width:2px;
+  background:rgba(245,166,35,0.08);
+}
+.tl-spine-fill {
+  position:absolute; top:0; left:0; width:100%; height:0%;
+  background:linear-gradient(to bottom, var(--amber), rgba(245,166,35,0.2));
+  transition:height 0.08s linear;
+}
+
+.tl-item {
+  position:relative; margin-bottom:72px;
+  opacity:0; transform:translateX(-16px);
+  transition:opacity 0.7s ease, transform 0.7s ease;
+}
+.tl-item.vis { opacity:1; transform:translateX(0); }
+
+/* Animated node */
+.tl-node {
+  position:absolute; left:-44px; top:4px;
+  width:24px; height:24px;
+  display:flex; align-items:center; justify-content:center;
+}
+.tl-node-ring {
+  width:24px; height:24px; border-radius:50%;
+  border:2px solid var(--amber);
+  background:var(--navy);
+  position:absolute;
+  transition:all 0.3s;
+}
+.tl-node-dot {
+  width:8px; height:8px; border-radius:50%;
+  background:var(--amber); position:relative; z-index:1;
+  transition:all 0.3s;
+}
+.tl-item:hover .tl-node-ring { transform:scale(1.3); box-shadow:0 0 20px rgba(245,166,35,0.4); }
+.tl-item:hover .tl-node-dot { transform:scale(1.2); }
+
+.tl-node-ring.edu { border-color:var(--blue); }
+.tl-node-dot.edu { background:var(--blue); }
+.tl-item:hover .tl-node-ring.edu { box-shadow:0 0 20px rgba(74,158,255,0.4); }
+
+.tl-node-ring.work { border-color:var(--green); }
+.tl-node-dot.work { background:var(--green); }
+.tl-item:hover .tl-node-ring.work { box-shadow:0 0 20px rgba(0,214,143,0.4); }
+
+.tl-connector {
+  position:absolute; left:-30px; top:28px;
+  width:18px; height:1px;
+  background:rgba(245,166,35,0.3);
+}
+.tl-connector.edu { background:rgba(74,158,255,0.3); }
+.tl-connector.work { background:rgba(0,214,143,0.3); }
+
+.tl-card {
+  background:var(--navy-light);
+  border:1px solid rgba(255,255,255,0.05);
+  border-radius:16px; padding:28px 32px;
+  position:relative; overflow:hidden;
+  transition:border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+.tl-item:hover .tl-card {
+  border-color:rgba(245,166,35,0.2);
+  transform:translateX(4px);
+  box-shadow:0 20px 60px rgba(0,0,0,0.4);
+}
+.tl-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg, var(--amber), transparent);
+  opacity:0; transition:opacity 0.3s;
+}
+.tl-item:hover .tl-card::before { opacity:1; }
+.tl-card.edu::before { background:linear-gradient(90deg, var(--blue), transparent); }
+.tl-card.work::before { background:linear-gradient(90deg, var(--green), transparent); }
+
+/* Gear decoration */
+.tl-gear {
+  position:absolute; right:24px; top:24px;
+  opacity:0.04; font-size:64px;
+  transition:opacity 0.3s, transform 0.5s;
+}
+.tl-item:hover .tl-gear { opacity:0.08; transform:rotate(20deg); }
+
+.tl-period { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--gray-dim); letter-spacing:1px; margin-bottom:8px; }
+.tl-role { font-family:'Space Grotesk',sans-serif; font-size:19px; font-weight:600; color:var(--white); margin-bottom:4px; }
+.tl-org { font-size:13px; font-weight:500; margin-bottom:14px; }
+.tl-org.amber { color:var(--amber); }
+.tl-org.blue { color:var(--blue); }
+.tl-org.green { color:var(--green); }
+.tl-desc { font-size:13.5px; color:var(--gray); line-height:1.75; margin-bottom:16px; max-width:640px; }
+.tl-chips { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px; }
+.chip { font-family:'JetBrains Mono',monospace; font-size:10px; padding:3px 10px; border-radius:20px; border:1px solid rgba(255,255,255,0.07); color:var(--gray); background:rgba(255,255,255,0.03); }
+.tl-wins { display:flex; flex-wrap:wrap; gap:8px; }
+.win { display:inline-flex; align-items:center; gap:5px; font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--amber); background:rgba(245,166,35,0.07); border:1px solid rgba(245,166,35,0.15); padding:4px 10px; border-radius:4px; }
+.win.blue { color:var(--blue); background:rgba(74,158,255,0.07); border-color:rgba(74,158,255,0.15); }
+.win.green { color:var(--green); background:rgba(0,214,143,0.07); border-color:rgba(0,214,143,0.15); }
+
+/* ─── PROJECTS ─── */
+.proj-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:20px; }
+.proj-card {
+  background:var(--navy-light); border:1px solid rgba(255,255,255,0.05);
+  border-radius:16px; padding:28px; position:relative; overflow:hidden;
+  opacity:0; transform:translateY(20px);
+  transition:opacity 0.7s, transform 0.7s, border-color 0.3s, box-shadow 0.3s;
+  cursor:default;
+}
+.proj-card.vis { opacity:1; transform:translateY(0); }
+.proj-card:hover { border-color:rgba(245,166,35,0.25); box-shadow:0 24px 64px rgba(0,0,0,0.5); transform:translateY(-6px) !important; }
+.proj-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg, var(--amber), rgba(245,166,35,0.2), transparent); opacity:0; transition:opacity 0.3s; }
+.proj-card:hover::before { opacity:1; }
+
+/* Circuit pattern in card */
+.proj-circuit { position:absolute; bottom:0; right:0; width:120px; height:120px; opacity:0.03; transition:opacity 0.3s; }
+.proj-card:hover .proj-circuit { opacity:0.07; }
+
+.proj-num { font-family:'Space Grotesk',sans-serif; font-size:56px; font-weight:700; color:rgba(245,166,35,0.06); line-height:1; margin-bottom:10px; }
+.proj-title { font-family:'Space Grotesk',sans-serif; font-size:16px; font-weight:600; color:var(--white); margin-bottom:6px; line-height:1.3; }
+.proj-org { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--amber); letter-spacing:1px; margin-bottom:14px; text-transform:uppercase; }
+.proj-desc { font-size:13px; color:var(--gray); line-height:1.7; margin-bottom:20px; }
+.proj-metrics { display:flex; gap:20px; flex-wrap:wrap; }
+.metric { display:flex; flex-direction:column; }
+.metric-val { font-family:'Space Grotesk',sans-serif; font-size:24px; font-weight:700; color:var(--amber); }
+.metric-val.green { color:var(--green); }
+.metric-val.blue { color:var(--blue); }
+.metric-label { font-size:10px; color:var(--gray); font-family:'JetBrains Mono',monospace; }
+
+/* ─── RESEARCH ─── */
+.research-hero {
+  background:linear-gradient(135deg, rgba(245,166,35,0.05), rgba(245,166,35,0.01));
+  border:1px solid rgba(245,166,35,0.15); border-radius:24px;
+  padding:56px; position:relative; overflow:hidden;
+  opacity:0; transform:translateY(20px);
+  transition:opacity 0.7s, transform 0.7s;
+}
+.research-hero.vis { opacity:1; transform:translateY(0); }
+.research-hero::after { content:'"'; position:absolute; right:40px; top:10px; font-size:240px; font-family:'Space Grotesk',sans-serif; color:rgba(245,166,35,0.03); line-height:1; pointer-events:none; }
+
+/* Animated circuit lines */
+.circuit-line { position:absolute; background:rgba(245,166,35,0.06); }
+
+.rq {
+  font-family:'Space Grotesk',sans-serif; font-size:clamp(18px, 2.5vw, 26px);
+  font-weight:500; color:var(--white); line-height:1.5; margin-bottom:24px; max-width:750px;
+}
+.rq em { color:var(--amber); font-style:normal; }
+.r-desc { font-size:14px; color:var(--gray); line-height:1.8; max-width:700px; margin-bottom:40px; }
+
+.pillars { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px; }
+.pillar {
+  background:rgba(6,13,26,0.7); border:1px solid rgba(255,255,255,0.06);
+  border-radius:14px; padding:22px; transition:border-color 0.3s, transform 0.3s;
+}
+.pillar:hover { border-color:rgba(245,166,35,0.2); transform:translateY(-3px); }
+.pillar-icon { font-size:26px; margin-bottom:10px; }
+.pillar-title { font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:600; color:var(--white); margin-bottom:6px; }
+.pillar-desc { font-size:12px; color:var(--gray); line-height:1.6; }
+
+/* ─── PUBLICATION ─── */
+.pub-wrap {
+  background:var(--navy-light); border:1px solid rgba(255,255,255,0.05);
+  border-radius:20px; padding:36px; display:flex; gap:28px;
+  align-items:flex-start;
+  opacity:0; transform:translateY(20px);
+  transition:opacity 0.7s, transform 0.7s, border-color 0.3s;
+}
+.pub-wrap.vis { opacity:1; transform:translateY(0); }
+.pub-wrap:hover { border-color:rgba(245,166,35,0.2); }
+.pub-icon-wrap { width:56px; height:56px; background:rgba(245,166,35,0.1); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:26px; flex-shrink:0; }
+.pub-badge { display:inline-flex; align-items:center; gap:6px; font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--green); background:rgba(0,214,143,0.08); border:1px solid rgba(0,214,143,0.2); padding:4px 10px; border-radius:4px; margin-bottom:8px; }
+.pub-title-text { font-family:'Space Grotesk',sans-serif; font-size:17px; font-weight:600; color:var(--white); margin-bottom:6px; line-height:1.4; }
+.pub-meta { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--amber); margin-bottom:12px; letter-spacing:0.5px; }
+.pub-abstract { font-size:13px; color:var(--gray); line-height:1.7; margin-bottom:16px; }
+.pub-links { display:flex; gap:10px; flex-wrap:wrap; }
+.pub-link { display:inline-flex; align-items:center; gap:6px; font-family:'JetBrains Mono',monospace; font-size:11px; padding:5px 14px; border-radius:6px; text-decoration:none; transition:all 0.2s; }
+.pub-link.zenodo { color:var(--blue); border:1px solid rgba(74,158,255,0.2); }
+.pub-link.zenodo:hover { background:rgba(74,158,255,0.1); }
+.pub-link.academia { color:var(--purple); border:1px solid rgba(139,92,246,0.2); }
+.pub-link.academia:hover { background:rgba(139,92,246,0.1); }
+
+/* ─── SKILLS ─── */
+.skills-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr)); gap:16px; }
+.skill-group {
+  background:var(--navy-light); border:1px solid rgba(255,255,255,0.05);
+  border-radius:14px; padding:24px;
+  opacity:0; transform:translateY(16px);
+  transition:opacity 0.6s, transform 0.6s, border-color 0.3s;
+}
+.skill-group.vis { opacity:1; transform:translateY(0); }
+.skill-group:hover { border-color:rgba(245,166,35,0.15); }
+.skill-group-label { font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--amber); letter-spacing:2px; text-transform:uppercase; margin-bottom:14px; }
+.skill-chips { display:flex; flex-wrap:wrap; gap:6px; }
+.sk { font-family:'JetBrains Mono',monospace; font-size:10px; padding:4px 10px; border-radius:6px; background:rgba(255,255,255,0.03); color:var(--gray); border:1px solid rgba(255,255,255,0.07); transition:all 0.2s; }
+.sk:hover { color:var(--amber); border-color:rgba(245,166,35,0.2); background:rgba(245,166,35,0.05); }
+
+/* ─── CONTACT ─── */
+.contact-wrap {
+  text-align:center; padding:100px 48px;
+  background:radial-gradient(ellipse at 50% 0%, rgba(245,166,35,0.05) 0%, transparent 70%);
+  position:relative; z-index:10;
+}
+.contact-label { font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--amber); letter-spacing:3px; text-transform:uppercase; margin-bottom:14px; }
+.contact-title { font-family:'Space Grotesk',sans-serif; font-size:clamp(32px, 5vw, 56px); font-weight:700; color:var(--white); letter-spacing:-2px; margin-bottom:16px; }
+.contact-sub { font-size:15px; color:var(--gray); max-width:480px; margin:0 auto 48px; line-height:1.8; }
+.contact-grid { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-bottom:40px; }
+
+.contact-card {
+  display:flex; align-items:center; gap:10px;
+  padding:14px 22px; border-radius:12px;
+  text-decoration:none; font-family:'Space Grotesk',sans-serif; font-size:14px; font-weight:500;
+  transition:all 0.3s; border:1px solid rgba(255,255,255,0.08);
+  background:var(--navy-light); color:var(--cream);
+}
+.contact-card:hover { transform:translateY(-3px); box-shadow:0 12px 32px rgba(0,0,0,0.4); }
+.contact-card.email:hover { border-color:var(--amber); color:var(--amber); }
+.contact-card.linkedin:hover { border-color:#0A66C2; color:#0A66C2; }
+.contact-card.research:hover { border-color:var(--green); color:var(--green); }
+.contact-card.publication:hover { border-color:var(--blue); color:var(--blue); }
+.cc-icon { font-size:18px; }
+
+.phd-status {
+  display:inline-flex; align-items:center; gap:10px;
+  font-family:'JetBrains Mono',monospace; font-size:12px;
+  color:var(--amber); background:rgba(245,166,35,0.08);
+  border:1px solid rgba(245,166,35,0.2); padding:10px 20px; border-radius:8px;
+}
+
+/* ─── FOOTER ─── */
+footer { text-align:center; padding:28px; border-top:1px solid rgba(255,255,255,0.04); font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--gray-dim); position:relative; z-index:10; }
+footer span { color:var(--amber); }
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:768px) {
+  nav { padding:14px 24px; }
+  .nav-links,.nav-status { display:none; }
+  section { padding:60px 24px; }
+  .hero { padding:90px 24px 70px; }
+  .hero-stats { gap:28px; }
+  .timeline-outer { padding-left:36px; }
+  .tl-node { left:-32px; }
+  .tl-connector { left:-22px; }
+  .pub-wrap { flex-direction:column; }
+  .contact-wrap { padding:60px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ANIMATED BACKGROUND CANVAS -->
+<canvas id="bgCanvas"></canvas>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">KM<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#journey">journey</a></li>
+    <li><a href="#projects">projects</a></li>
+    <li><a href="#research">research</a></li>
+    <li><a href="#publication">publication</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+  <div class="nav-status"><div class="status-dot"></div>open to PhD opportunities</div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-schematic">
+    <svg viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <style>
+          .sch { fill:none; stroke:rgba(245,166,35,0.07); stroke-width:1; }
+          .sch-b { fill:none; stroke:rgba(74,158,255,0.05); stroke-width:1; }
+          @keyframes drawLine { from{stroke-dashoffset:1000;} to{stroke-dashoffset:0;} }
+          .draw1 { stroke-dasharray:1000; stroke-dashoffset:1000; animation:drawLine 3s 0.5s ease forwards; }
+          .draw2 { stroke-dasharray:1000; stroke-dashoffset:1000; animation:drawLine 3s 1s ease forwards; }
+          .draw3 { stroke-dasharray:1000; stroke-dashoffset:1000; animation:drawLine 3s 1.5s ease forwards; }
+          .draw4 { stroke-dasharray:1000; stroke-dashoffset:1000; animation:drawLine 2s 2s ease forwards; }
+        </style>
+      </defs>
+      <!-- Grid -->
+      <line x1="0" y1="100" x2="1400" y2="100" class="sch"/>
+      <line x1="0" y1="200" x2="1400" y2="200" class="sch"/>
+      <line x1="0" y1="300" x2="1400" y2="300" class="sch"/>
+      <line x1="0" y1="400" x2="1400" y2="400" class="sch"/>
+      <line x1="0" y1="500" x2="1400" y2="500" class="sch"/>
+      <line x1="0" y1="600" x2="1400" y2="600" class="sch"/>
+      <line x1="0" y1="700" x2="1400" y2="700" class="sch"/>
+      <line x1="0" y1="800" x2="1400" y2="800" class="sch"/>
+      <line x1="200" y1="0" x2="200" y2="900" class="sch"/>
+      <line x1="400" y1="0" x2="400" y2="900" class="sch"/>
+      <line x1="600" y1="0" x2="600" y2="900" class="sch"/>
+      <line x1="800" y1="0" x2="800" y2="900" class="sch"/>
+      <line x1="1000" y1="0" x2="1000" y2="900" class="sch"/>
+      <line x1="1200" y1="0" x2="1200" y2="900" class="sch"/>
+      <!-- Animated schematic paths -->
+      <path d="M 1000 200 L 1100 200 L 1100 300 L 1200 300 L 1200 400" class="sch draw1" stroke="rgba(245,166,35,0.15)" stroke-width="2"/>
+      <path d="M 1200 400 L 1300 400 L 1300 500 L 1400 500" class="sch draw2" stroke="rgba(245,166,35,0.12)" stroke-width="1.5"/>
+      <circle cx="1100" cy="200" r="4" fill="rgba(245,166,35,0.2)" class="draw1"/>
+      <circle cx="1200" cy="400" r="4" fill="rgba(245,166,35,0.2)" class="draw2"/>
+      <!-- Data flow lines -->
+      <path d="M 800 100 L 800 500 L 1000 500" class="sch-b draw3" stroke="rgba(74,158,255,0.12)" stroke-width="1.5"/>
+      <path d="M 600 300 L 700 300 L 700 600 L 800 600" class="sch draw4" stroke="rgba(245,166,35,0.08)" stroke-width="1"/>
+      <!-- Gear symbols -->
+      <circle cx="1100" cy="300" r="20" class="sch" stroke="rgba(245,166,35,0.1)"/>
+      <circle cx="1100" cy="300" r="12" class="sch" stroke="rgba(245,166,35,0.1)"/>
+      <circle cx="1300" cy="500" r="16" class="sch-b" stroke="rgba(74,158,255,0.08)"/>
+      <!-- Corner markers -->
+      <rect x="20" y="20" width="40" height="40" class="sch" stroke="rgba(245,166,35,0.12)"/>
+      <line x1="20" y1="40" x2="60" y2="40" class="sch" stroke="rgba(245,166,35,0.12)"/>
+      <line x1="40" y1="20" x2="40" y2="60" class="sch" stroke="rgba(245,166,35,0.12)"/>
+      <rect x="1340" y="840" width="40" height="40" class="sch" stroke="rgba(245,166,35,0.12)"/>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow"><span class="eyebrow-line"></span>Industrial Engineer &amp; Researcher<span class="eyebrow-line"></span></div>
+    <h1 class="hero-name">
+      Kaushal
+      <span class="line2">Makwana</span>
+    </h1>
+    <p class="hero-role">M.S. Industrial Engineering · University of Houston · Houston, TX</p>
+    <div class="hero-typewriter">
+      <span class="tw-prefix">&gt;&gt;</span>
+      <span id="typewriter"></span><span class="cursor"></span>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num"><span class="ctr" data-t="4">0</span>+</span>
+        <span class="stat-label">years industry</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num"><span class="ctr" data-t="90">0</span>%</span>
+        <span class="stat-label">forecast accuracy</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num"><span class="ctr" data-t="4028">0</span></span>
+        <span class="stat-label">records analyzed</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num"><span class="ctr" data-t="1">0</span></span>
+        <span class="stat-label">published paper</span>
+      </div>
+    </div>
+    <div class="hero-cta">
+      <a href="#contact" class="btn btn-amber">Get In Touch</a>
+      <a href="https://doi.org/10.5281/zenodo.20713382" target="_blank" class="btn btn-ghost">View Research ↗</a>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="scroll-arrow"></div>scroll to explore</div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- JOURNEY -->
+<div class="section-wrap">
+<section id="journey">
+  <div class="section-header">
+    <div class="section-eyebrow">The Journey</div>
+    <h2 class="section-title">From mechanical roots<br>to manufacturing intelligence</h2>
+    <p class="section-sub">Every role added a layer. The Volvo co-op is where they all came together — and revealed a research question industry tools alone cannot answer.</p>
+  </div>
+
+  <div class="timeline-outer">
+    <div class="tl-spine"><div class="tl-spine-fill" id="spineProgress"></div></div>
+
+    <!-- 1 -->
+    <div class="tl-item" data-d="80">
+      <div class="tl-node"><div class="tl-node-ring edu"></div><div class="tl-node-dot edu"></div></div>
+      <div class="tl-connector edu"></div>
+      <div class="tl-card edu">
+        <div class="tl-gear">🎓</div>
+        <div class="tl-period">2017 — JUL 2021</div>
+        <div class="tl-role">Bachelor of Engineering, Mechanical Engineering</div>
+        <div class="tl-org blue">Gujarat Technology University · India · GPA 3.58</div>
+        <p class="tl-desc">Four years of mechanical engineering fundamentals — thermodynamics, manufacturing processes, engineering design, materials science. The structural language for understanding industrial systems that every role after this has built on.</p>
+        <div class="tl-chips"><span class="chip">Thermodynamics</span><span class="chip">Manufacturing Processes</span><span class="chip">Engineering Design</span><span class="chip">Materials Science</span></div>
+        <div class="tl-wins"><span class="win blue">GPA 3.58</span><span class="win blue">Six Sigma Green Belt</span></div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="tl-item" data-d="0">
+      <div class="tl-node"><div class="tl-node-ring work"></div><div class="tl-node-dot work"></div></div>
+      <div class="tl-connector work"></div>
+      <div class="tl-card work">
+        <div class="tl-gear">⚙</div>
+        <div class="tl-period">SEP 2020 — AUG 2021</div>
+        <div class="tl-role">Manufacturing Quality Trainee</div>
+        <div class="tl-org green">Shree Ram Industries · Gujarat, India</div>
+        <p class="tl-desc">First real exposure to the factory floor. Applied SPC and control charts to monitor process variation. Conducted line balancing studies and ensured ISO compliance. Learned early that data and decisions are two completely different things.</p>
+        <div class="tl-chips"><span class="chip">SPC</span><span class="chip">ISO Audits</span><span class="chip">Line Balancing</span><span class="chip">Control Charts</span><span class="chip">5S</span></div>
+        <div class="tl-wins"><span class="win green">↓ 10% scrap &amp; rework</span><span class="win green">ISO compliant</span></div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="tl-item" data-d="160">
+      <div class="tl-node"><div class="tl-node-ring work"></div><div class="tl-node-dot work"></div></div>
+      <div class="tl-connector work"></div>
+      <div class="tl-card work">
+        <div class="tl-gear">🏭</div>
+        <div class="tl-period">OCT 2021 — JUL 2023</div>
+        <div class="tl-role">Industrial Engineer</div>
+        <div class="tl-org green">K. Steel · Ahmedabad, India</div>
+        <p class="tl-desc">Designed warehouse layouts, ran Kaizen and SMED events, conducted MOST-based time studies. The kind of role where you see every inefficiency in the system and have just enough authority to fix some of them.</p>
+        <div class="tl-chips"><span class="chip">AutoCAD</span><span class="chip">Kaizen</span><span class="chip">SMED</span><span class="chip">MOST/MTM</span><span class="chip">VSM</span><span class="chip">WMS</span></div>
+        <div class="tl-wins"><span class="win green">↑ 20% space utilization</span><span class="win green">↓ 30% downtime</span><span class="win green">↑ 22% productivity</span></div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="tl-item" data-d="240">
+      <div class="tl-node"><div class="tl-node-ring edu"></div><div class="tl-node-dot edu"></div></div>
+      <div class="tl-connector edu"></div>
+      <div class="tl-card edu">
+        <div class="tl-gear">📚</div>
+        <div class="tl-period">AUG 2023 — MAY 2025</div>
+        <div class="tl-role">Master of Industrial Engineering (MIE)</div>
+        <div class="tl-org blue">University of Houston · Houston, TX · GPA 3.42</div>
+        <p class="tl-desc">Moved to the United States to pursue graduate study. First semester was hard — new country, new system, supporting myself financially. Got a D in Probability and Statistics. Went back, worked with tutors, finished with an A and one of the highest scores in the class. That comeback mattered more than the grade.</p>
+        <div class="tl-chips"><span class="chip">Discrete Event Simulation</span><span class="chip">Production Control</span><span class="chip">Human Factors</span><span class="chip">Facility Planning</span><span class="chip">Operations Research</span></div>
+        <div class="tl-wins"><span class="win blue">D → A in Probability &amp; Statistics</span><span class="win blue">Top scorer in class</span></div>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="tl-item" data-d="320">
+      <div class="tl-node"><div class="tl-node-ring"></div><div class="tl-node-dot"></div></div>
+      <div class="tl-connector"></div>
+      <div class="tl-card">
+        <div class="tl-gear">🔬</div>
+        <div class="tl-period">JAN 2025 — MAY 2025</div>
+        <div class="tl-role">Quality Co-Op — Industrial Engineering Intern</div>
+        <div class="tl-org amber">Volvo Group · Macungie, Pennsylvania</div>
+        <p class="tl-desc">The experience that changed everything. Built a regression-based predictive model achieving 90% forecast accuracy on inspection backlogs. Then discovered the real problem: operators on the floor would not trust a model they could not understand. That gap between accurate prediction and trusted action became my research question.</p>
+        <div class="tl-chips"><span class="chip">OLS Regression</span><span class="chip">Monte Carlo Sim</span><span class="chip">Power BI</span><span class="chip">VBA Automation</span><span class="chip">Excel Solver</span><span class="chip">Kanban</span><span class="chip">PFEP</span></div>
+        <div class="tl-wins"><span class="win">90% forecast accuracy</span><span class="win">↓ 40% reporting effort</span><span class="win">Published research</span></div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="tl-item" data-d="400">
+      <div class="tl-node"><div class="tl-node-ring work"></div><div class="tl-node-dot work"></div></div>
+      <div class="tl-connector work"></div>
+      <div class="tl-card work">
+        <div class="tl-gear">⚡</div>
+        <div class="tl-period">AUG 2025 — PRESENT</div>
+        <div class="tl-role">Senior Industrial Engineer</div>
+        <div class="tl-org green">CDF · Houston, TX</div>
+        <p class="tl-desc">Leading 4 concurrent engineering projects across climate intelligence, solar, and energy manufacturing departments. Supporting automation and continuous improvement in energy systems — opening a second research direction around AI-driven energy efficiency optimization in industrial facilities.</p>
+        <div class="tl-chips"><span class="chip">Energy Systems</span><span class="chip">Smart Manufacturing</span><span class="chip">Project Leadership</span><span class="chip">Climate Intelligence</span><span class="chip">Process Optimization</span></div>
+        <div class="tl-wins"><span class="win green">4 concurrent projects</span><span class="win green">Energy systems focus</span></div>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="tl-item" data-d="480">
+      <div class="tl-node"><div class="tl-node-ring"></div><div class="tl-node-dot"></div></div>
+      <div class="tl-connector"></div>
+      <div class="tl-card">
+        <div class="tl-gear">🎯</div>
+        <div class="tl-period">2026 — NEXT CHAPTER</div>
+        <div class="tl-role">PhD in Industrial Engineering</div>
+        <div class="tl-org amber">Multiple US &amp; International Programs</div>
+        <p class="tl-desc">The questions I encountered on the factory floor cannot be answered by industry tools alone. Actively seeking a fully funded PhD position to develop explainable AI frameworks for real-time manufacturing quality control — building systems that operators can actually trust and act on. The research question came from practice. The answers require doctoral inquiry.</p>
+        <div class="tl-chips"><span class="chip">Explainable AI</span><span class="chip">Smart Manufacturing</span><span class="chip">XAI Frameworks</span><span class="chip">Human-AI Decision Making</span><span class="chip">Energy Optimization</span></div>
+        <div class="tl-wins"><span class="win">Actively seeking funded PhD</span><span class="win">DOI: 10.5281/zenodo.20713382</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- PROJECTS -->
+<div class="section-wrap">
+<section id="projects">
+  <div class="section-header">
+    <div class="section-eyebrow">Key Projects</div>
+    <h2 class="section-title">Work that shaped<br>the research question</h2>
+    <p class="section-sub">Each project added a piece to the puzzle. The Volvo model is where it came together — and revealed the gap that still needs solving.</p>
+  </div>
+
+  <div class="proj-grid">
+
+    <div class="proj-card" data-d="0">
+      <svg class="proj-circuit" viewBox="0 0 120 120" fill="none">
+        <path d="M10 60 H40 V20 H80 V60 H110" stroke="rgba(245,166,35,1)" stroke-width="1.5"/>
+        <path d="M40 60 V100 H80 V60" stroke="rgba(245,166,35,1)" stroke-width="1"/>
+        <circle cx="40" cy="60" r="3" fill="rgba(245,166,35,1)"/>
+        <circle cx="80" cy="60" r="3" fill="rgba(245,166,35,1)"/>
+        <circle cx="40" cy="20" r="3" fill="rgba(245,166,35,1)"/>
+        <circle cx="80" cy="20" r="3" fill="rgba(245,166,35,1)"/>
+      </svg>
+      <div class="proj-num">01</div>
+      <div class="proj-title">Regression-Based Backlog Prediction Model</div>
+      <div class="proj-org">Manufacturing Facility · 2025 · Published on Zenodo</div>
+      <p class="proj-desc">Multi-variable OLS regression + Monte Carlo simulation for 30-day inspection backlog forecasting. Four-module VBA architecture with Excel Solver integration. Deployed on 4,028 real PIR records. The model worked. Operators did not trust it. That was the more interesting finding.</p>
+      <div class="proj-metrics">
+        <div class="metric"><span class="metric-val">90%</span><span class="metric-label">forecast accuracy</span></div>
+        <div class="metric"><span class="metric-val blue">4,028</span><span class="metric-label">records</span></div>
+        <div class="metric"><span class="metric-val green">30</span><span class="metric-label">day horizon</span></div>
+      </div>
+    </div>
+
+    <div class="proj-card" data-d="100">
+      <svg class="proj-circuit" viewBox="0 0 120 120" fill="none">
+        <rect x="20" y="20" width="80" height="80" stroke="rgba(74,158,255,1)" stroke-width="1"/>
+        <path d="M20 60 H100" stroke="rgba(74,158,255,1)" stroke-width="1"/>
+        <path d="M60 20 V100" stroke="rgba(74,158,255,1)" stroke-width="1"/>
+        <circle cx="60" cy="60" r="8" stroke="rgba(74,158,255,1)" stroke-width="1.5"/>
+      </svg>
+      <div class="proj-num">02</div>
+      <div class="proj-title">Warehouse Layout Optimization with Discrete Event Simulation</div>
+      <div class="proj-org">University of Houston · 2024</div>
+      <p class="proj-desc">Full-scale warehouse redesign combining AutoCAD facility planning, demand forecasting, pick-path analysis, and discrete event simulation. Introduced me to simulation-based research methodology and showed how much efficiency gets left on the floor without analytical tools.</p>
+      <div class="proj-metrics">
+        <div class="metric"><span class="metric-val">12%</span><span class="metric-label">efficiency gain</span></div>
+        <div class="metric"><span class="metric-val blue">15%</span><span class="metric-label">WIP reduction</span></div>
+      </div>
+    </div>
+
+    <div class="proj-card" data-d="200">
+      <svg class="proj-circuit" viewBox="0 0 120 120" fill="none">
+        <path d="M10 30 H50 V10 H110 V50 H70 V90 H10 V30" stroke="rgba(0,214,143,1)" stroke-width="1.5"/>
+        <circle cx="50" cy="30" r="4" fill="rgba(0,214,143,1)"/>
+        <circle cx="70" cy="90" r="4" fill="rgba(0,214,143,1)"/>
+      </svg>
+      <div class="proj-num">03</div>
+      <div class="proj-title">Power BI Quality Dashboard &amp; Predictive Reporting</div>
+      <div class="proj-org">Manufacturing Facility · 2025</div>
+      <p class="proj-desc">Built Power BI dashboards tracking defect KPIs, backlog trends, and closure rates. Automated reporting pipeline. Supported Kanban and PFEP implementation for pull-based replenishment. Made the invisible visible for the first time in that facility.</p>
+      <div class="proj-metrics">
+        <div class="metric"><span class="metric-val green">40%</span><span class="metric-label">effort reduction</span></div>
+        <div class="metric"><span class="metric-val blue">Live</span><span class="metric-label">KPI tracking</span></div>
+      </div>
+    </div>
+
+    <div class="proj-card" data-d="300">
+      <svg class="proj-circuit" viewBox="0 0 120 120" fill="none">
+        <circle cx="60" cy="60" r="40" stroke="rgba(245,166,35,1)" stroke-width="1"/>
+        <circle cx="60" cy="60" r="25" stroke="rgba(245,166,35,1)" stroke-width="1"/>
+        <circle cx="60" cy="60" r="8" stroke="rgba(245,166,35,1)" stroke-width="1.5"/>
+        <line x1="60" y1="20" x2="60" y2="35" stroke="rgba(245,166,35,1)" stroke-width="2"/>
+        <line x1="60" y1="85" x2="60" y2="100" stroke="rgba(245,166,35,1)" stroke-width="2"/>
+        <line x1="20" y1="60" x2="35" y2="60" stroke="rgba(245,166,35,1)" stroke-width="2"/>
+        <line x1="85" y1="60" x2="100" y2="60" stroke="rgba(245,166,35,1)" stroke-width="2"/>
+      </svg>
+      <div class="proj-num">04</div>
+      <div class="proj-title">Facility Layout Redesign &amp; Changeover Optimization</div>
+      <div class="proj-org">Steel Manufacturing Firm · 2021–2023</div>
+      <p class="proj-desc">Designed warehouse layout modification in AutoCAD. Led Kaizen and SMED events targeting changeover. MOST-based time studies developed labor standards. Early proof that data-driven industrial decisions create measurable, quantifiable impact.</p>
+      <div class="proj-metrics">
+        <div class="metric"><span class="metric-val">30%</span><span class="metric-label">downtime cut</span></div>
+        <div class="metric"><span class="metric-val blue">22%</span><span class="metric-label">productivity</span></div>
+        <div class="metric"><span class="metric-val green">20%</span><span class="metric-label">space gain</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- RESEARCH -->
+<div class="section-wrap">
+<section id="research">
+  <div class="section-header">
+    <div class="section-eyebrow">Research Direction</div>
+    <h2 class="section-title">The question that<br>needs a PhD to answer</h2>
+    <p class="section-sub">Industry practice revealed the problem. Doctoral research is how I intend to solve it.</p>
+  </div>
+
+  <div class="research-hero" id="researchBox">
+    <!-- Animated circuit lines -->
+    <div class="circuit-line" style="left:0;top:40%;width:60px;height:1px;"></div>
+    <div class="circuit-line" style="right:0;bottom:30%;width:80px;height:1px;"></div>
+    <div class="circuit-line" style="left:30%;top:0;width:1px;height:40px;"></div>
+
+    <p class="rq">How do we build <em>explainable AI frameworks</em> for manufacturing quality control that are not just accurate, but interpretable enough that engineers on the factory floor actually <em>trust and act on them</em>?</p>
+    <p class="r-desc">At a major truck manufacturing facility, I built a predictive model with 90% accuracy. Operators consistently ignored it — not because it was wrong, but because it could not explain itself in terms they could engage with critically. That gap between prediction and adoption is the human-AI decision gap. It shows up everywhere AI meets experienced operators. Closing it requires doctoral-level research into explainability, real-time decision support, and human-AI collaboration in industrial systems.</p>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-icon">🔍</div>
+        <div class="pillar-title">Explainable AI for Quality Control</div>
+        <p class="pillar-desc">XAI frameworks that output predictions in manufacturing-relevant language operators can understand and act on in real time.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">⚡</div>
+        <div class="pillar-title">Adaptive Real-Time Forecasting</div>
+        <p class="pillar-desc">Online learning algorithms that update parameters continuously as operational conditions shift — no manual recalibration required.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-icon">🌱</div>
+        <div class="pillar-title">Energy-Efficient Process Optimization</div>
+        <p class="pillar-desc">AI-driven frameworks for real-time energy consumption optimization in smart manufacturing — motivated by direct industry work.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- PUBLICATION -->
+<div class="section-wrap">
+<section id="publication">
+  <div class="section-header">
+    <div class="section-eyebrow">Publications</div>
+    <h2 class="section-title">From factory floor<br>to citable research</h2>
+    <p class="section-sub">Published June 16, 2026. Open access. Permanently citable with DOI.</p>
+  </div>
+
+  <div class="pub-wrap" id="pubCard">
+    <div class="pub-icon-wrap">📄</div>
+    <div>
+      <div class="pub-badge">✓ Open Access · Zenodo · DOI Verified</div>
+      <div class="pub-title-text">When the Data Knew But Nobody Listened: Building a Regression-Based Backlog Prediction Model in a High-Volume Truck Manufacturing Environment</div>
+      <div class="pub-meta">TECHNICAL NOTE · ZENODO · 10.5281/zenodo.20713382 · 2026</div>
+      <p class="pub-abstract">Documents a regression-based predictive modeling framework deployed at a major truck manufacturing facility. OLS regression extended into a 30-day stochastic Monte Carlo forecast. Achieves 90% workload forecast accuracy on 4,028 real production records. The paper's key contribution is the documented human-AI decision gap encountered during deployment — the central motivation for proposed doctoral research in explainable AI for manufacturing quality control.</p>
+      <div class="pub-links">
+        <a href="https://doi.org/10.5281/zenodo.20713382" target="_blank" class="pub-link zenodo">🔗 Zenodo DOI</a>
+        <a href="https://independent.academia.edu/KaushalMakwana1" target="_blank" class="pub-link academia">📚 Academia.edu</a>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- SKILLS -->
+<div class="section-wrap">
+<section id="skills">
+  <div class="section-header">
+    <div class="section-eyebrow">Technical Skills</div>
+    <h2 class="section-title">Tools of the trade</h2>
+    <p class="section-sub">Built across 4 years of industry practice and graduate research.</p>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-group" data-d="0">
+      <div class="skill-group-label">Data &amp; Analytics</div>
+      <div class="skill-chips">
+        <span class="sk">Power BI</span><span class="sk">Advanced Excel</span><span class="sk">VBA Macros</span><span class="sk">Minitab</span><span class="sk">OLS Regression</span><span class="sk">Monte Carlo Sim</span><span class="sk">SAP</span><span class="sk">KPI Dashboards</span><span class="sk">Forecasting Models</span>
+      </div>
+    </div>
+    <div class="skill-group" data-d="80">
+      <div class="skill-group-label">Industrial Engineering</div>
+      <div class="skill-chips">
+        <span class="sk">VSM</span><span class="sk">Kaizen</span><span class="sk">SMED</span><span class="sk">5S</span><span class="sk">SPC</span><span class="sk">Line Balancing</span><span class="sk">MOST/MTM</span><span class="sk">AutoCAD</span><span class="sk">WMS</span><span class="sk">Kanban</span><span class="sk">PFEP</span>
+      </div>
+    </div>
+    <div class="skill-group" data-d="160">
+      <div class="skill-group-label">Research Methods</div>
+      <div class="skill-chips">
+        <span class="sk">OLS Regression</span><span class="sk">Stochastic Modeling</span><span class="sk">Discrete Event Sim</span><span class="sk">Scenario Analysis</span><span class="sk">Statistical Analysis</span><span class="sk">Excel Solver</span>
+      </div>
+    </div>
+    <div class="skill-group" data-d="240">
+      <div class="skill-group-label">Certifications</div>
+      <div class="skill-chips">
+        <span class="sk">Six Sigma Green Belt</span><span class="sk">ISO Auditor</span><span class="sk">Lean Manufacturing</span>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- CONTACT -->
+<div class="contact-wrap" id="contact">
+  <div class="contact-label">Get In Touch</div>
+  <h2 class="contact-title">Let's talk research</h2>
+  <p class="contact-sub">Actively seeking fully funded PhD opportunities in smart manufacturing and explainable AI systems. Open to conversations with faculty, collaborators, and industry researchers.</p>
+
+  <div class="contact-grid">
+    <a href="mailto:kaushaldmakwana10@gmail.com" class="contact-card email">
+      <span class="cc-icon">✉</span> kaushaldmakwana10@gmail.com
+    </a>
+    <a href="https://www.linkedin.com/in/kaushalmakwana" target="_blank" class="contact-card linkedin">
+      <span class="cc-icon">💼</span> LinkedIn Profile
+    </a>
+    <a href="https://independent.academia.edu/KaushalMakwana1" target="_blank" class="contact-card research">
+      <span class="cc-icon">📚</span> Academia.edu
+    </a>
+    <a href="https://doi.org/10.5281/zenodo.20713382" target="_blank" class="contact-card publication">
+      <span class="cc-icon">📄</span> Published Research
+    </a>
+  </div>
+
+  <div class="phd-status">
+    <span>●</span> Actively Seeking Fully Funded PhD — Spring 2027 &amp; Fall 2027
+  </div>
+</div>
+
+<footer>
+  Kaushal Dhirenbhai Makwana &nbsp;·&nbsp; <span>Senior Industrial Engineer &amp; Researcher</span> &nbsp;·&nbsp; Houston, TX &nbsp;·&nbsp; <span>2026</span>
+</footer>
+
+<script>
+// ─── CANVAS: Particle + Circuit Animation ───
+const canvas = document.getElementById('bgCanvas');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [], nodes = [];
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+// Create particles
+for (let i = 0; i < 60; i++) {
+  particles.push({
+    x: Math.random() * W, y: Math.random() * H,
+    vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
+    r: Math.random() * 1.5 + 0.5,
+    alpha: Math.random() * 0.4 + 0.1,
+    color: Math.random() > 0.7 ? '#4A9EFF' : '#F5A623'
+  });
+}
+
+// Create fixed circuit nodes
+for (let i = 0; i < 8; i++) {
+  nodes.push({
+    x: Math.random() * W, y: Math.random() * H,
+    pulse: Math.random() * Math.PI * 2,
+    speed: 0.02 + Math.random() * 0.01
+  });
+}
+
+function drawCircuit() {
+  // Draw connections between nearby particles
+  for (let i = 0; i < particles.length; i++) {
+    for (let j = i + 1; j < particles.length; j++) {
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if (dist < 140) {
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        const alpha = (1 - dist/140) * 0.12;
+        ctx.strokeStyle = `rgba(245,166,35,${alpha})`;
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+      }
+    }
+  }
+}
+
+function drawNodes() {
+  nodes.forEach(n => {
+    n.pulse += n.speed;
+    const r = 3 + Math.sin(n.pulse) * 1.5;
+    const alpha = 0.3 + Math.sin(n.pulse) * 0.2;
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(245,166,35,${alpha})`;
+    ctx.fill();
+    // Pulse ring
+    const pr = r + 6 + Math.sin(n.pulse) * 4;
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, pr, 0, Math.PI * 2);
+    ctx.strokeStyle = `rgba(245,166,35,${alpha * 0.3})`;
+    ctx.lineWidth = 1;
+    ctx.stroke();
+  });
+}
+
+function animate() {
+  ctx.clearRect(0, 0, W, H);
+  particles.forEach(p => {
+    p.x += p.vx; p.y += p.vy;
+    if (p.x < 0 || p.x > W) p.vx *= -1;
+    if (p.y < 0 || p.y > H) p.vy *= -1;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = p.color === '#F5A623'
+      ? `rgba(245,166,35,${p.alpha})`
+      : `rgba(74,158,255,${p.alpha})`;
+    ctx.fill();
+  });
+  drawCircuit();
+  drawNodes();
+  requestAnimationFrame(animate);
+}
+animate();
+
+// ─── TYPEWRITER ───
+const phrases = [
+  'Building predictive models from real factory data.',
+  'Researching the human-AI decision gap.',
+  'Pursuing a PhD in smart manufacturing.',
+  'Turning industry problems into research questions.',
+  'From the factory floor to the frontier.'
+];
+let pi = 0, ci = 0, del = false;
+const tw = document.getElementById('typewriter');
+function type() {
+  const cur = phrases[pi];
+  if (!del) {
+    tw.textContent = cur.substring(0, ci + 1);
+    ci++;
+    if (ci === cur.length) { del = true; setTimeout(type, 2200); return; }
+  } else {
+    tw.textContent = cur.substring(0, ci - 1);
+    ci--;
+    if (ci === 0) { del = false; pi = (pi + 1) % phrases.length; }
+  }
+  setTimeout(type, del ? 35 : 55);
+}
+setTimeout(type, 1600);
+
+// ─── COUNTER ANIMATION ───
+function animateCount(el, target) {
+  let v = 0;
+  const step = target / 60;
+  const run = () => {
+    v = Math.min(v + step, target);
+    el.textContent = Math.floor(v).toLocaleString();
+    if (v < target) requestAnimationFrame(run);
+  };
+  requestAnimationFrame(run);
+}
+
+// ─── INTERSECTION OBSERVER ───
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target;
+    const delay = parseInt(el.dataset.d || 0);
+    setTimeout(() => el.classList.add('vis'), delay);
+    // Counters
+    el.querySelectorAll('.ctr').forEach(c => {
+      if (!c.dataset.done) { c.dataset.done = 1; animateCount(c, parseInt(c.dataset.t)); }
+    });
+    io.unobserve(el);
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.tl-item,.proj-card,.skill-group,.pub-wrap,.stat').forEach(el => io.observe(el));
+
+// Research box
+const rb = document.getElementById('researchBox');
+const rio = new IntersectionObserver(([e]) => { if (e.isIntersecting) { rb.classList.add('vis'); rio.disconnect(); }}, {threshold:0.1});
+rio.observe(rb);
+
+// Pub card
+const pc = document.getElementById('pubCard');
+const pio = new IntersectionObserver(([e]) => { if (e.isIntersecting) { pc.classList.add('vis'); pio.disconnect(); }}, {threshold:0.1});
+pio.observe(pc);
+
+// Stats counters on hero
+document.querySelectorAll('.stat .ctr').forEach(c => {
+  const sio = new IntersectionObserver(([e]) => {
+    if (e.isIntersecting && !c.dataset.done) {
+      c.dataset.done = 1;
+      animateCount(c, parseInt(c.dataset.t));
+      sio.disconnect();
+    }
+  }, {threshold:0.5});
+  sio.observe(c);
+});
+
+// ─── SPINE PROGRESS ───
+const spine = document.getElementById('spineProgress');
+const tlWrap = document.querySelector('.timeline-outer');
+window.addEventListener('scroll', () => {
+  if (!tlWrap || !spine) return;
+  const r = tlWrap.getBoundingClientRect();
+  const p = Math.max(0, Math.min(1, (window.innerHeight - r.top) / (r.height + window.innerHeight)));
+  spine.style.height = (p * 100) + '%';
+}, { passive: true });
+
+// ─── SMOOTH SCROLL ───
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) t.scrollIntoView({ behavior:'smooth', block:'start' });
+  });
+});
+</script>
+</body>
+</html>
